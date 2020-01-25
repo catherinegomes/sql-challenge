@@ -1,99 +1,107 @@
-# SQL Homework - Employee Database: A Mystery in Two Parts
+# Homework Assignment
 
-![sql.png](sql.png)
+## Installation Instructions
 
-## Background
-
-It is a beautiful spring day, and it is two weeks since you have been hired as a new data engineer at Pewlett Hackard. Your first major task is a research project on employees of the corporation from the 1980s and 1990s. All that remain of the database of employees from that period are six CSV files.
-
-In this assignment, you will design the tables to hold data in the CSVs, import the CSVs into a SQL database, and answer questions about the data. In other words, you will perform:
-
-1. Data Modeling
-
-2. Data Engineering
-
-3. Data Analysis
-
-### Before You Begin
-
-1. Create a new repository for this project called `sql-challenge`. **Do not add this homework to an existing repository**.
-
-2. Clone the new repository to your computer.
-
-3. Inside your local git repository, create a directory for the SQL challenge. Use a folder name to correspond to the challenge: **EmployeeSQL**.
-
-4. Add your files to this folder.
-
-5. Push the above changes to GitHub.
+* Refer to the [installation guide](Installation.md) to install the necessary files.
 
 ## Instructions
 
-#### Data Modeling
+* 1a. Display the first and last names of all actors from the table `actor`.
 
-Inspect the CSVs and sketch out an ERD of the tables. Feel free to use a tool like [http://www.quickdatabasediagrams.com](http://www.quickdatabasediagrams.com).
+* 1b. Display the first and last name of each actor in a single column in upper case letters. Name the column `Actor Name`.
 
-#### Data Engineering
+* 2a. You need to find the ID number, first name, and last name of an actor, of whom you know only the first name, "Joe." What is one query would you use to obtain this information?
 
-* Use the information you have to create a table schema for each of the six CSV files. Remember to specify data types, primary keys, foreign keys, and other constraints.
+* 2b. Find all actors whose last name contain the letters `GEN`:
 
-* Import each CSV file into the corresponding SQL table.
+* 2c. Find all actors whose last names contain the letters `LI`. This time, order the rows by last name and first name, in that order:
 
-#### Data Analysis
+* 2d. Using `IN`, display the `country_id` and `country` columns of the following countries: Afghanistan, Bangladesh, and China:
 
-Once you have a complete database, do the following:
+* 3a. You want to keep a description of each actor. You don't think you will be performing queries on a description, so create a column in the table `actor` named `description` and use the data type `BLOB` (Make sure to research the type `BLOB`, as the difference between it and `VARCHAR` are significant).
 
-1. List the following details of each employee: employee number, last name, first name, gender, and salary.
+* 3b. Very quickly you realize that entering descriptions for each actor is too much effort. Delete the `description` column.
 
-2. List employees who were hired in 1986.
+* 4a. List the last names of actors, as well as how many actors have that last name.
 
-3. List the manager of each department with the following information: department number, department name, the manager's employee number, last name, first name, and start and end employment dates.
+* 4b. List last names of actors and the number of actors who have that last name, but only for names that are shared by at least two actors
 
-4. List the department of each employee with the following information: employee number, last name, first name, and department name.
+* 4c. The actor `HARPO WILLIAMS` was accidentally entered in the `actor` table as `GROUCHO WILLIAMS`. Write a query to fix the record.
 
-5. List all employees whose first name is "Hercules" and last names begin with "B."
+* 4d. Perhaps we were too hasty in changing `GROUCHO` to `HARPO`. It turns out that `GROUCHO` was the correct name after all! In a single query, if the first name of the actor is currently `HARPO`, change it to `GROUCHO`.
 
-6. List all employees in the Sales department, including their employee number, last name, first name, and department name.
+* 5a. You cannot locate the schema of the `address` table. Which query would you use to re-create it?
 
-7. List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
+  * Hint: [https://dev.mysql.com/doc/refman/5.7/en/show-create-table.html](https://dev.mysql.com/doc/refman/5.7/en/show-create-table.html)
 
-8. In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
+* 6a. Use `JOIN` to display the first and last names, as well as the address, of each staff member. Use the tables `staff` and `address`:
 
-## Bonus (Optional)
+* 6b. Use `JOIN` to display the total amount rung up by each staff member in August of 2005. Use tables `staff` and `payment`.
 
-As you examine the data, you are overcome with a creeping suspicion that the dataset is fake. You surmise that your boss handed you spurious data in order to test the data engineering skills of a new employee. To confirm your hunch, you decide to take the following steps to generate a visualization of the data, with which you will confront your boss:
+* 6c. List each film and the number of actors who are listed for that film. Use tables `film_actor` and `film`. Use inner join.
 
-1. Import the SQL database into Pandas. (Yes, you could read the CSVs directly in Pandas, but you are, after all, trying to prove your technical mettle.) This step may require some research. Feel free to use the code below to get started. Be sure to make any necessary modifications for your username, password, host, port, and database name:
+* 6d. How many copies of the film `Hunchback Impossible` exist in the inventory system?
 
-   ```sql
-   from sqlalchemy import create_engine
-   engine = create_engine('postgresql://localhost:5432/<your_db_name>')
-   connection = engine.connect()
-   ```
+* 6e. Using the tables `payment` and `customer` and the `JOIN` command, list the total paid by each customer. List the customers alphabetically by last name:
 
-* Consult [SQLAlchemy documentation](https://docs.sqlalchemy.org/en/latest/core/engines.html#postgresql) for more information.
+  ![Total amount paid](Images/total_payment.png)
 
-* If using a password, do not upload your password to your GitHub repository. See [https://www.youtube.com/watch?v=2uaTPmNvH0I](https://www.youtube.com/watch?v=2uaTPmNvH0I) and [https://martin-thoma.com/configuration-files-in-python/](https://martin-thoma.com/configuration-files-in-python/) for more information.
+* 7a. The music of Queen and Kris Kristofferson have seen an unlikely resurgence. As an unintended consequence, films starting with the letters `K` and `Q` have also soared in popularity. Use subqueries to display the titles of movies starting with the letters `K` and `Q` whose language is English.
 
-2. Create a histogram to visualize the most common salary ranges for employees.
+* 7b. Use subqueries to display all actors who appear in the film `Alone Trip`.
 
-3. Create a bar chart of average salary by title.
+* 7c. You want to run an email marketing campaign in Canada, for which you will need the names and email addresses of all Canadian customers. Use joins to retrieve this information.
 
-## Epilogue
+* 7d. Sales have been lagging among young families, and you wish to target all family movies for a promotion. Identify all movies categorized as _family_ films.
 
-Evidence in hand, you march into your boss's office and present the visualization. With a sly grin, your boss thanks you for your work. On your way out of the office, you hear the words, "Search your ID number." You look down at your badge to see that your employee ID number is 499942.
+* 7e. Display the most frequently rented movies in descending order.
 
-## Submission
+* 7f. Write a query to display how much business, in dollars, each store brought in.
 
-* Create an image file of your ERD.
+* 7g. Write a query to display for each store its store ID, city, and country.
 
-* Create a `.sql` file of your table schemata.
+* 7h. List the top five genres in gross revenue in descending order. (**Hint**: you may need to use the following tables: category, film_category, inventory, payment, and rental.)
 
-* Create a `.sql` file of your queries.
+* 8a. In your new role as an executive, you would like to have an easy way of viewing the Top five genres by gross revenue. Use the solution from the problem above to create a view. If you haven't solved 7h, you can substitute another query to create a view.
 
-* (Optional) Create a Jupyter Notebook of the bonus analysis.
+* 8b. How would you display the view that you created in 8a?
 
-* Create and upload a repository with the above files to GitHub and post a link on BootCamp Spot.
+* 8c. You find that you no longer need the view `top_five_genres`. Write a query to delete it.
 
-### Copyright
+## Appendix: List of Tables in the Sakila DB
 
-Trilogy Education Services © 2019. All Rights Reserved.
+* A schema is also available as `sakila_schema.svg`. Open it with a browser to view.
+
+```sql
+'actor'
+'actor_info'
+'address'
+'category'
+'city'
+'country'
+'customer'
+'customer_list'
+'film'
+'film_actor'
+'film_category'
+'film_list'
+'film_text'
+'inventory'
+'language'
+'nicer_but_slower_film_list'
+'payment'
+'rental'
+'sales_by_film_category'
+'sales_by_store'
+'staff'
+'staff_list'
+'store'
+```
+
+## Uploading Homework
+
+* To submit this homework using BootCampSpot:
+
+  * Create a GitHub repository.
+  * Upload your .sql file with the completed queries.
+  * Submit a link to your GitHub repo through BootCampSpot.
