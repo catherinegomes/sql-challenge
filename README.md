@@ -9,11 +9,12 @@
 * Understand the different kinds of joins and how to use them to create new tables in MySQL.
 * Solidify the foundations of writing basic- to intermediate-level MySQL statements.
 * Develop an introductory understanding of table design and database management.
-<br/>
+    <p>
 
-*-- Sakila db available in [Instructions](Instructions/Installation.md) --*
+    *-- Sakila db available in [Instructions](Instructions/Installation.md) --*
+
     **USE sakila;**
-
+<br/>   
 
 * 1a Display the first and last names of all actors from the table `actor`.
 
@@ -98,6 +99,7 @@
 * 4d. Perhaps we were too hasty in changing `GROUCHO` to `HARPO`. It turns out that `GROUCHO` was the correct name after all! In a single query, if the first name of the actor is currently `HARPO`, change it to `GROUCHO`.
 
     *-- Remove safety to permit update --*
+
     **SET SQL_SAFE_UPDATES = 0;**
 
     **UPDATE actor**
@@ -107,6 +109,7 @@
     **WHERE first_name = 'HARPO' AND last_name = 'WILLIAMS';**
 
     *-- Turn safety back on --*
+
     **SET SQL_SAFE_UPDATES = 1;**
 <br/>
 
